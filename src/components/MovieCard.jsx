@@ -1,37 +1,12 @@
 import "../css/MovieCard.css";
-import { useEffect } from "react";
 import { useMovieContext } from "../contexts/useMovieContext";
 import { useNavigate } from "react-router-dom";
 
-const FAVORITES_KEY = "favoriteMovies";
-
 const MovieCard = ({ movie }) => {
-  const {
-    isFavorite,
-    addToFavorites,
-    removeFromFavorites,
-    favorites,
-    setFavorites,
-  } = useMovieContext();
+  const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
+
   const favorite = isFavorite(movie.id);
   const navigate = useNavigate();
-
-  // Load favorites from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem(FAVORITES_KEY);
-    if (stored) {
-      try {
-        setFavorites(JSON.parse(stored));
-      } catch (error) {
-        console.error("Error parsing favorites from localStorage:", error);
-      }
-    }
-  }, [setFavorites]);
-
-  // Save favorites to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-  }, [favorites]);
 
   const onFavouriteClick = (e) => {
     e.preventDefault();
