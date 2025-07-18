@@ -43,7 +43,7 @@ export const MovieProvider = ({ children }) => {
 
   const isFavorite = (movieId) => {
     const result = favorites.some((movie) => movie.id === movieId);
-    console.log(`isFavorite(${movieId}) -> ${result}`);
+    // console.log(`isFavorite(${movieId}) -> ${result}`);
     return result;
   };
 

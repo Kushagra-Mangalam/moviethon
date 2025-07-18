@@ -19,7 +19,7 @@ const MoviePlayer = () => {
           style={{ height: "auto", width: "100%", aspectRatio: "640 / 360" }}
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen
-          frameBorder="0"
+          // frameBorder="0"
           title={movie.title}
         ></iframe>
       ) : (
