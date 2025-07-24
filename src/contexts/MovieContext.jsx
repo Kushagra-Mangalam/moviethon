@@ -9,6 +9,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     try {
       const storedFavs = localStorage.getItem("favorites");
+
       console.log("[MovieContext] Loaded from localStorage:", storedFavs);
       if (storedFavs) {
         const parsed = JSON.parse(storedFavs);
@@ -16,7 +17,7 @@ export const MovieProvider = ({ children }) => {
         setFavorites(parsed);
       }
     } catch (e) {
-      console.error("Failed to parse favorites:", e);
+      console.error("Failed to parse stored data:", e);
       localStorage.removeItem("favorites");
     } finally {
       setLoading(false);
@@ -26,7 +27,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     if (!loading) {
       localStorage.setItem("favorites", JSON.stringify(favorites));
-      console.log("[MovieContext] Saved to localStorage:", favorites);
+      console.log("[MovieContext] Saved favorites to localStorage:", favorites);
     }
   }, [favorites, loading]);
 
@@ -43,7 +44,6 @@ export const MovieProvider = ({ children }) => {
 
   const isFavorite = (movieId) => {
     const result = favorites.some((movie) => movie.id === movieId);
-    // console.log(`isFavorite(${movieId}) -> ${result}`);
     return result;
   };
 
